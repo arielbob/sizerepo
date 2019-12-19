@@ -35,9 +35,19 @@ exports.HEIGHT_UNITS = {
   CM: 'cm'
 }
 
+exports.QUERY_PARAM_TO_HEIGHT_UNITS = {
+  'ft/in': this.HEIGHT_UNITS.FT_IN,
+  cm: this.HEIGHT_UNITS.CM
+}
+
 exports.WEIGHT_UNITS = {
   LBS: 'lbs',
   KGS: 'kgs'
+}
+
+exports.QUERY_PARAM_TO_WEIGHT_UNITS = {
+  lbs: this.WEIGHT_UNITS.LBS,
+  kgs: this.WEIGHT_UNITS.KGS
 }
 
 exports.ACCEPTED_FILETYPES = 'image/png, image/jpeg'

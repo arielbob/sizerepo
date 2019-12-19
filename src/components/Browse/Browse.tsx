@@ -1,11 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-import Search from '../Search'
-// import ResultCard from '../SearchPage/ResultCard'
+import queryString from 'query-string'
+import Search from '../Search/Search'
 import { RecentCard } from '../PostCard'
+import SearchFormInput from '../../types/search'
+import { convertSearchFormValuesToQueryParams } from '../../util'
 
 interface BrowseProps {
-  history: History;
+  history: any;
 }
 
 interface BrowseState {
@@ -52,12 +54,18 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
       })
   }
 
+  handleSearch(values: SearchFormInput) {
+    const searchQueryParams = convertSearchFormValuesToQueryParams(values)
+    const queryStr = queryString.stringify(searchQueryParams, { skipNull: true })
+    this.props.history.push('/search?' + queryStr)
+  }
+
   render() {
     return (
       <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto mt-3'>
         <div className='max-w-lg mx-auto'>
           <div className='mb-2 bg-white rounded p-3 border'>
-            <Search history={this.props.history} />
+            <Search onSearch={(values) => this.handleSearch(values)} />
           </div>
         </div>
         <h1 className='text-2xl font-bold mb-2'>Recently Posted</h1>

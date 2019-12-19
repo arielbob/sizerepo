@@ -5,8 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './Navbar'
-import Browse from './Browse'
-import SearchPage from './SearchPage'
+import Browse from './Browse/Browse'
+import SearchPage from './SearchPage/SearchPage'
 import NewPost from './NewPost'
 
 const Root = () => {
