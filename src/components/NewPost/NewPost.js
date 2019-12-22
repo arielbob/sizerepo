@@ -156,9 +156,9 @@ class NewPost extends React.Component {
     const hasNext = this.state.currentPageIndex < PAGES_ORDER.length - 1
 
     return (
-      <section className='overflow-hidden h-post-form flex items-stretch max-w-4xl mx-auto my-8 bg-white rounded border text-gray-800'>
-        <div className='flex w-full'>
-          <div className='w-5/12'>
+      <section className='my-8 px-2'>
+        <div className='mx-auto bg-white rounded border text-gray-800 flex flex-col overflow-hidden md:h-580 max-w-4xl md:flex-row'>
+          <div className='w-full h-580 md:w-5/12 md:h-auto'>
             <ImageUpload
               imageUrl={this.state.image.url}
               error={this.state.image.error}
@@ -166,7 +166,7 @@ class NewPost extends React.Component {
               onRotateClick={() => this.handleRotateClick()}
               onFileChange={(e) => this.handleFileChange(e.target.files[0])}/>
           </div>
-          <div className='w-7/12'>
+          <div className='w-full md:w-7/12'>
             {
               currentPage === PAGES.CLOTHING ?
               <ClothingDetails

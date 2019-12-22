@@ -7,7 +7,7 @@ import {
 import Navbar from './Navbar'
 import Browse from './Browse/Browse'
 import SearchPage from './SearchPage/SearchPage'
-import NewPost from './NewPost'
+import NewPost from './NewPost/NewPost'
 import PostPage from './PostPage/PostPage'
 
 const Root = () => {
