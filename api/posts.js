@@ -226,4 +226,21 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.get('/:id', (req, res, next) => {
+  postsService.getPostById(req.params.id)
+    .then(post => {
+      if (!post) {
+        const err = new Error('Post not found')
+        err.status = 404
+        return next(err)
+      }
+
+      console.log(post)
+      res.status(200).json({
+        data: post
+      })
+    })
+    .catch(err => next(err))
+})
+
 module.exports = router

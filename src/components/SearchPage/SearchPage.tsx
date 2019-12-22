@@ -204,6 +204,8 @@ class SearchPage extends React.Component<any, any> {
                 <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
                   {this.state.results.map(result => {
                     const { id, data } = result
+                    // just because id isn't in the _source object in elasticsearch
+                    data.id = id
                     return (
                       <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
                         <ResultCard data={data} />

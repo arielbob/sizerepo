@@ -24,6 +24,16 @@ exports.CLOTHING_SIZES = {
   XXL: 'XXL'
 }
 
+exports.CLOTHING_SIZES_FULL_NAMES_BY_ACRONYM = {
+  XXS: 'Extra-Extra-Small',
+  XS: 'Extra-Small',
+  S: 'Small',
+  M: 'Medium',
+  L: 'Large',
+  XL: 'Extra-Large',
+  XXL: 'Extra-Extra-Large'
+}
+
 exports.GENDERS = {
   MALE: 'Male',
   FEMALE: 'Female',

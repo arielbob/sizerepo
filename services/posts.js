@@ -50,5 +50,39 @@ exports.create = (data) => {
 }
 
 exports.getPosts = (limit) => {
-  return db.any('SELECT * FROM posts ORDER BY created_at DESC LIMIT $1', [limit])
+  return db.any(`
+    SELECT
+      id,
+      brand,
+      article_name,
+      article_gender,
+      article_type,
+      article_size,
+      article_waist,
+      article_inseam,
+      height_m,
+      weight_kg,
+      gender,
+      image_url
+    FROM posts ORDER BY created_at DESC LIMIT $1
+  `, [limit])
+}
+
+exports.getPostById = (id) => {
+  return db.oneOrNone(`
+    SELECT
+      id,
+      brand,
+      article_name,
+      article_gender,
+      article_type,
+      article_size,
+      article_waist,
+      article_inseam,
+      height_m,
+      weight_kg,
+      gender,
+      image_url
+    FROM posts WHERE id=$1
+  `, [id])
 }

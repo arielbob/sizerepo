@@ -1,5 +1,5 @@
 import SearchFormInput, { SearchQueryParams } from './types/search'
-import { CLOTHING_TYPES } from '../common/constants'
+import { CLOTHING_TYPES, CLOTHING_SIZES_FULL_NAMES_BY_ACRONYM } from '../common/constants'
 
 export const handleNumberChange = (formik, name, limit) => {
   return (e) => {
@@ -10,8 +10,8 @@ export const handleNumberChange = (formik, name, limit) => {
   }
 }
 
-export const buildSizingString = (article_size, article_waist, article_inseam) => {
-  if (article_size !== null) return article_size.toUpperCase()
+export const buildSizingString = (article_size, article_waist, article_inseam, isFull) => {
+  if (article_size !== null) return isFull ? CLOTHING_SIZES_FULL_NAMES_BY_ACRONYM[article_size.toUpperCase()]: article_size.toUpperCase()
   if (article_waist !== null && article_inseam !== null) return (article_waist + 'x' + article_inseam)
   if (article_waist !== null) return article_waist
   return 'No Size'
