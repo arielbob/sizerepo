@@ -43,7 +43,7 @@ export const BasicSelect = ({ field, form: { touched, errors }, options }) => {
 // formik puts error message as child of component prop in ErrorMessage
 export const BasicError = ({ children }) => <p className='text-italic text-red-500 text-sm'>{children}</p>
 
-export const FormButton = ({ text, direction, onClick, type }) => {
+export const FormButton = ({ text, direction, onClick, type, disabled }) => {
   let ArrowSymbol
   if (direction) {
     if (direction === 'next') {
@@ -60,8 +60,9 @@ export const FormButton = ({ text, direction, onClick, type }) => {
   return (
     <button
       type={type || 'button'}
-      className='mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded'
+      className='mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded disabled:opacity-50 disabled:cursor-not-allowed'
       onClick={onClick}
+      disabled={disabled}
     >
       { direction === 'prev' ? ArrowSymbol : null }
       { text }

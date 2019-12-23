@@ -128,7 +128,8 @@ class NewPost extends React.Component {
     const route = 'http://localhost:3000/api/posts/submit'
 
     this.setState({
-      isLoading: true
+      isLoading: true,
+      error: ''
     })
 
     axios.post(route, fd).then(res => {
@@ -139,7 +140,7 @@ class NewPost extends React.Component {
           error: ''
         }
       })
-      console.log(res.data.data.id)
+      this.props.history.push('/posts/' + res.data.data.id)
     }).catch(err => {
       this.setState({
         isLoading: false,
@@ -186,6 +187,7 @@ class NewPost extends React.Component {
               <Review
                 onPrevClick={() => this.prevPage()}
                 onPostClick={() => this.handlePost()}
+                isLoading={this.state.isLoading}
                 formValues={this.state.formValues}
               /> : null
             }

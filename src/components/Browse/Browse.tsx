@@ -72,7 +72,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
         {/* {this.state.isLoading ? 'Loading' : JSON.stringify(this.state.posts)} */}
         {
           this.state.posts &&
-          <div className='sm:-mx-1 rounded overflow-hidden'>
+          <div className='sm:-mx-1 rounded overflow-hidden mb-8'>
             <ul className='sm:flex'>
               {this.state.posts.map(data => (
                 <li className='block border-b sm:border-b-0 sm:w-1/3 sm:inline-block sm:px-2 sm:mb-4' key={data.id}>

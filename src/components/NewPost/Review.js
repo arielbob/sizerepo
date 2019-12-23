@@ -19,7 +19,7 @@ const Line = ({ title, info }) => {
   )
 }
 
-const Review = ({ onPrevClick, onPostClick, formValues }) => {
+const Review = ({ onPrevClick, onPostClick, formValues, isLoading }) => {
   const { clothing, body } = formValues
   return (
     <section className='p-3 h-full flex flex-col'>
@@ -82,7 +82,7 @@ const Review = ({ onPrevClick, onPostClick, formValues }) => {
         </div>
         <div className='flex justify-between'>
           <FormButton text='Body Information' direction='prev' onClick={onPrevClick} />
-          <FormButton text='Post' onClick={onPostClick} />
+          <FormButton text={isLoading ? 'Posting...' : 'Post'} onClick={onPostClick} disabled={isLoading} />
         </div>
       </div>
     </section>
