@@ -1,4 +1,4 @@
-const db = require('../db')
+const db = require('../api/db')
 const { CLOTHING_TYPES } = require('../common/constants')
 
 // TODO: move ES document creation here as well

@@ -192,18 +192,6 @@ router.post('/submit', upload.single('image'), async (req, res, next) => {
       return next(err)
     }
 
-    // add post to elasticsearch
-    // TODO: should not do this, instead track changes and do bulk updates, since each update reindexes the entire index
-    try {
-      await es.index({
-        index: process.env.ES_INDEX,
-        id: postId,
-        body: postDocument
-      })
-    } catch (err) {
-      return next(err)
-    }
-
     return res.status(200).json({
       message: 'Post created',
       data: { id: postId }

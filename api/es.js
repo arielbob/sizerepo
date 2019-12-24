@@ -1,8 +1,8 @@
-const elasticsearch = require('elasticsearch')
+const { Client } = require('@elastic/elasticsearch')
 require('dotenv').config()
 
-const client = new elasticsearch.Client({
-  hosts: [process.env.ES_HOST]
+const client = new Client({
+  node: process.env.ES_HOST
 })
 
 module.exports = client

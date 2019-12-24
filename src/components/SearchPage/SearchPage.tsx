@@ -192,7 +192,7 @@ class SearchPage extends React.Component<any, any> {
       <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto mt-3'>
         <div className='-mx-2 flex flex-col md:flex-row'>
           <section className='w-full px-2 md:max-w-xl mx-auto md:w-1/3 md:pt-10'> 
-            <div className='bg-white border rounded p-2 sticky'>
+            <div className='bg-white border rounded p-3 sticky'>
               <Search initialValues={this.state.searchValues} onSearch={(data) => this.handleSearch(data)} />
             </div>
           </section>

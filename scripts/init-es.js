@@ -4,9 +4,7 @@ require('dotenv').config()
 const init = async () => {
   // ping server to make sure it's running
   console.log('pinging')
-  await client.ping({
-    requestTimeout: 5000,
-  })
+  await client.ping()
     .then(res => console.log('OK'))
     .catch(err => console.error('elasticsearch not working!'))
   console.log()
@@ -26,6 +24,7 @@ const init = async () => {
     index: process.env.ES_INDEX,
     body: {
       properties: {
+        id: { type: 'keyword' },
         brand: { type: 'text' },
         article_name: { type: 'text' },
         article_gender: { type: 'keyword' },
@@ -35,12 +34,13 @@ const init = async () => {
         article_inseam: { type: 'byte' },
         height_m: { type: 'float' },
         weight_kg: { type: 'float' },
-        gender: { type: 'keyword' }
+        gender: { type: 'keyword' },
+        image_url: { type: 'text', index: false }
       }
     }
   })
     .then(res => console.log('created mapping:', res))
-    .catch(console.error)
+    .catch(err => console.error(err.meta.body.error))
   console.log()
 
   // display mappings
@@ -48,7 +48,7 @@ const init = async () => {
   client.indices.getMapping({
     index: process.env.ES_INDEX
   })
-    .then(res => console.log('mappings:', res.fitrepo.mappings.properties))
+    .then(res => console.log('mappings:', res.body.fitrepo.mappings.properties))
     .catch(console.error)
 }
 

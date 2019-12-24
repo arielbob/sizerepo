@@ -160,9 +160,9 @@ router.get('/', async (req, res, next) => {
       match: { gender: { query: body.gender } }
     })
 
-    let results
+    let searchResponse
     try {
-      results = await es.search({
+      searchResponse = await es.search({
         index: 'fitrepo',
         body: {
           from: parseInt(page) - 1 || 0,
@@ -183,7 +183,7 @@ router.get('/', async (req, res, next) => {
 
     return res.status(200).json({
       data: {
-        results: results.hits.hits.map(r => ({
+        results: searchResponse.body.hits.hits.map(r => ({
           id: r._id,
           data: r._source
         }))
