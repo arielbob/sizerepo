@@ -67,8 +67,9 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
           </div>
         </div>
         <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>
+        { this.state.isLoading && <h2>Loading...</h2> }
         {
-          !this.state.error && this.state.posts &&
+          !this.state.error && !this.state.isLoading && this.state.posts &&
           <>
             { this.state.posts.length === 0 ? <h2>No recent posts</h2> : 
             <div className='border md:border-0 md:-mx-1 rounded overflow-hidden mb-8 scrollbar-hidden'>

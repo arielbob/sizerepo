@@ -71,7 +71,7 @@ class Search extends React.Component<SearchProps, SearchState> {
             <div className='flex flex-col'>
               <div className='mb-3'>
                 <h2 className='text-xl font-bold mb-1'>Search</h2>
-                <Field name='query' component={BasicInput} />
+                <Field name='query' component={BasicInput} placeholder='Search "APC Sweater"' />
                 <ErrorMessage name='query' component={BasicError} />
               </div>
               <button type='button' onClick={() => this.handleClothingClick()} className='mb-1 flex items-center cursor-pointer px-1 hover:bg-gray-200 rounded mb-1'>

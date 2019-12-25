@@ -4,7 +4,7 @@ export const Label = ({ labelName }) => (
   <label className='block text-sm mb-1 text-gray-800'>{labelName}</label>
 )
 
-export const BasicInput = ({ field, form: { touched, errors }, suffix, onChange }) => {
+export const BasicInput = ({ field, form: { touched, errors }, suffix, onChange, placeholder }) => {
   const borderClass = (touched[field.name] && errors[field.name]) ? 'border-red-200' : 'border-gray-200'
   return (
     <div className='relative'>
@@ -12,6 +12,7 @@ export const BasicInput = ({ field, form: { touched, errors }, suffix, onChange 
         className={'border px-3 py-1 pr-8 leading-tight rounded w-full ' + borderClass}
         {...field}
         onChange={onChange || field.onChange}
+        placeholder={placeholder || null}
       />
       {
         suffix &&

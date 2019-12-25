@@ -212,8 +212,9 @@ class SearchPage extends React.Component<any, SearchPageState> {
           </section>
           <section className='w-full px-2 md:w-2/3'> 
             <h2 className='text-xl font-bold mb-1'>Results</h2>
+            { this.state.isLoading && <h2>Loading...</h2> }
             {
-              !this.state.error && this.state.results &&
+              !this.state.error && !this.state.isLoading && this.state.results &&
               <>
                 { this.state.results.length == 0 ? <h2>No posts found</h2> :
                   <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
