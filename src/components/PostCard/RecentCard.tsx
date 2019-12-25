@@ -10,8 +10,8 @@ const RecentCard: React.SFC<PostCardProps> = ({ data }) => {
     image_url,
   } = data
   return (
-    <div className='flex flex-row h-40 bg-white w-full p-3 sm:border sm:h-auto sm:rounded sm:flex-col'>
-      <Link to={'/posts/' + id} className='overflow-hidden w-3/12 rounded mr-3 sm:mr-0 sm:mb-2 sm:w-full sm:h-56'>
+    <div className='flex flex-row h-40 bg-white w-full p-3 md:border md:h-auto md:rounded md:flex-col'>
+      <Link to={'/posts/' + id} className='overflow-hidden w-3/12 rounded mr-3 md:mr-0 md:mb-2 md:w-full md:h-56'>
         <img className='object-cover h-full w-full' src={image_url}></img>
       </Link>
       <div className='w-9/12 h-24 md:w-full'>

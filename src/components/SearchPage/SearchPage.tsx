@@ -189,32 +189,30 @@ class SearchPage extends React.Component<any, any> {
 
   render() {
     return (
-      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto mt-3'>
+      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='-mx-2 flex flex-col md:flex-row'>
-          <section className='w-full px-2 md:max-w-xl mx-auto md:w-1/3 md:pt-10'> 
+          <section className='w-full px-2 md:max-w-xl mx-auto mb-4 md:w-1/3 md:pt-8'> 
             <div className='bg-white border rounded p-3 sticky'>
               <Search initialValues={this.state.searchValues} onSearch={(data) => this.handleSearch(data)} />
             </div>
           </section>
-          <section className='w-full md:w-2/3'> 
-            <div className='p-2'>
-              <h2 className='text-lg font-bold mb-1'>Results</h2>
-              {
-                !this.state.isLoading && this.state.results &&
-                <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
-                  {this.state.results.map(result => {
-                    const { id, data } = result
-                    // just because id isn't in the _source object in elasticsearch
-                    data.id = id
-                    return (
-                      <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
-                        <ResultCard data={data} />
-                      </li>
-                    )
-                  })}
-                </ul>
-              }
-            </div>
+          <section className='w-full px-2 md:w-2/3'> 
+            <h2 className='text-xl font-bold mb-1'>Results</h2>
+            {
+              !this.state.isLoading && this.state.results &&
+              <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
+                {this.state.results.map(result => {
+                  const { id, data } = result
+                  // just because id isn't in the _source object in elasticsearch
+                  data.id = id
+                  return (
+                    <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
+                      <ResultCard data={data} />
+                    </li>
+                  )
+                })}
+              </ul>
+            }
           </section>
         </div>
         { this.state.isLoading && 'Loading...' }

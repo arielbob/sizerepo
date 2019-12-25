@@ -202,7 +202,7 @@ router.post('/submit', upload.single('image'), async (req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-  const RECENT_POSTS_LIMIT = 3
+  const RECENT_POSTS_LIMIT = 5
   postsService.getPosts(RECENT_POSTS_LIMIT)
     .then(posts => {
       res.status(200).json({

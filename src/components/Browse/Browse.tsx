@@ -62,20 +62,20 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
 
   render() {
     return (
-      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto mt-3'>
-        <div className='max-w-lg mx-auto'>
-          <div className='mb-2 bg-white rounded p-3 border'>
+      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
+        <div className='w-full md:max-w-lg mx-auto'>
+          <div className='mb-4 bg-white rounded p-3 border'>
             <Search onSearch={(values) => this.handleSearch(values)} />
           </div>
         </div>
-        <h1 className='text-2xl font-bold mb-2'>Recently Posted</h1>
+        <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>
         {/* {this.state.isLoading ? 'Loading' : JSON.stringify(this.state.posts)} */}
         {
           this.state.posts &&
-          <div className='sm:-mx-1 rounded overflow-hidden mb-8'>
-            <ul className='sm:flex'>
+          <div className='border md:border-0 md:-mx-1 rounded overflow-hidden mb-8 scrollbar-hidden'>
+            <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
               {this.state.posts.map(data => (
-                <li className='block border-b sm:border-b-0 sm:w-1/3 sm:inline-block sm:px-2 sm:mb-4' key={data.id}>
+                <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2 md:mb-4' key={data.id}>
                   <RecentCard data={data} />
                   {/* <PostCard data={data} /> */}
                 </li>

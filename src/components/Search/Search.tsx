@@ -70,7 +70,7 @@ class Search extends React.Component<SearchProps, SearchState> {
           <Form className='flex flex-col justify-between flex-grow'>
             <div className='flex flex-col'>
               <div className='mb-3'>
-                <h2 className='text-lg font-bold mb-1'>Search</h2>
+                <h2 className='text-xl font-bold mb-1'>Search</h2>
                 <Field name='query' component={BasicInput} />
                 <ErrorMessage name='query' component={BasicError} />
               </div>
