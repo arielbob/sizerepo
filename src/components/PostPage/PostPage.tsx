@@ -7,12 +7,13 @@ import { CLOTHING_GENDERS_SHORT_TO_FULL, GENDERS_SHORT_TO_FULL } from '../../../
 
 interface PostPageState {
   isLoading: boolean,
-  postData: PostData
+  postData: PostData,
+  error: string
 }
 
 const PostImage: React.SFC<any> = ({ data }) => {
   return (
-    <img className='object-contain' src={data.image_url}></img>
+    <img className='object-cover' src={data.image_url}></img>
   )
 }
 
@@ -80,7 +81,8 @@ class PostPage extends React.Component<any, PostPageState> {
     super(props)
     this.state = {
       isLoading: false,
-      postData: null
+      postData: null,
+      error: ''
     }
   }
  
@@ -90,11 +92,14 @@ class PostPage extends React.Component<any, PostPageState> {
     axios.get('http://localhost:3000/api/posts/' + id)
       .then(res => {
         this.setState({
-          postData: res.data.data
+          postData: res.data.data,
+          error: ''
         })
         console.log(res.data.data)
       }).catch(err => {
-        console.error(err)
+        this.setState({
+          error: err.response ? err.response.data.message : 'Could not fetch post'
+        })
       }).finally(() => {
         this.setState({ isLoading: false })
       })
@@ -108,7 +113,8 @@ class PostPage extends React.Component<any, PostPageState> {
             { this.state.postData && <PostImage data={this.state.postData} /> }
           </div>
           <div className='w-full p-3 md:w-7/12'>
-            { this.state.postData && <PostInfo data={this.state.postData} /> }
+            { !this.state.error && this.state.postData && <PostInfo data={this.state.postData} /> }
+            { this.state.error && <h2>{this.state.error}</h2> }
           </div>
         </div>
       </section>

@@ -11,9 +11,9 @@ interface BrowseProps {
 }
 
 interface BrowseState {
-  isLoading: boolean;
-  posts: any[];
-  error: string;
+  isLoading: boolean,
+  posts: any[],
+  error: string
 }
 
 class Browse extends React.Component<BrowseProps, BrowseState> {
@@ -36,20 +36,18 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
       .then(res => {
         this.setState({
           isLoading: false,
-          posts: res.data.data.posts
+          posts: res.data.data.posts,
+          error: ''
         })
       })
       .catch(err => {
-        let message
-        if (err.response) {
-          message = err.response.data.message
-        } else {
-          message = 'An error occurred'
-        }
-        console.log(message)
         this.setState({
-          isLoading: false,
-          error: message
+          error: err.response ? err.response.data.message : 'Could not fetch recent posts'
+        })
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false
         })
       })
   }
@@ -69,20 +67,23 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
           </div>
         </div>
         <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>
-        {/* {this.state.isLoading ? 'Loading' : JSON.stringify(this.state.posts)} */}
         {
-          this.state.posts &&
-          <div className='border md:border-0 md:-mx-1 rounded overflow-hidden mb-8 scrollbar-hidden'>
-            <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
-              {this.state.posts.map(data => (
-                <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2 md:mb-4' key={data.id}>
-                  <RecentCard data={data} />
-                  {/* <PostCard data={data} /> */}
-                </li>
-              ))}
-            </ul>
-          </div>
+          !this.state.error && this.state.posts &&
+          <>
+            { this.state.posts.length === 0 ? <h2>No recent posts</h2> : 
+            <div className='border md:border-0 md:-mx-1 rounded overflow-hidden mb-8 scrollbar-hidden'>
+              <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
+                {this.state.posts.map(data => (
+                  <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2 md:mb-4' key={data.id}>
+                    <RecentCard data={data} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            }
+          </>
         }
+        { this.state.error && <h2>{this.state.error}</h2> }
       </div>
     )
   }

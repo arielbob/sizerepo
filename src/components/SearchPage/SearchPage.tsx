@@ -131,13 +131,21 @@ const convertQueryParamsToSearchData = (params: SearchQueryParams): SearchData =
   return searchData
 }
 
-class SearchPage extends React.Component<any, any> {
+interface SearchPageState {
+  isLoading: boolean,
+  results: any[],
+  searchValues: SearchFormInput,
+  error: string
+}
+
+class SearchPage extends React.Component<any, SearchPageState> {
   constructor(props) {
     super(props)
     this.state = {
       isLoading: false,
       results: null,
-      searchValues: null
+      searchValues: null,
+      error: ''
     }
   }
 
@@ -178,9 +186,15 @@ class SearchPage extends React.Component<any, any> {
 
     axios.get('http://localhost:3000/api/search' + (apiQueryStr[0] === '?' ? '' : '?') + apiQueryStr)
       .then(res => {
-        this.setState({ results: res.data.data.results })
+        this.setState({
+          results: res.data.data.results,
+          error: ''
+        })
         console.log(res.data.data)
       }).catch(err => {
+        this.setState({
+          error: err.response ? err.response.data.message : 'Could not fetch results'
+        })
         console.error(err)
       }).finally(() => {
         this.setState({ isLoading: false })
@@ -199,23 +213,27 @@ class SearchPage extends React.Component<any, any> {
           <section className='w-full px-2 md:w-2/3'> 
             <h2 className='text-xl font-bold mb-1'>Results</h2>
             {
-              !this.state.isLoading && this.state.results &&
-              <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
-                {this.state.results.map(result => {
-                  const { id, data } = result
-                  // just because id isn't in the _source object in elasticsearch
-                  data.id = id
-                  return (
-                    <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
-                      <ResultCard data={data} />
-                    </li>
-                  )
-                })}
-              </ul>
+              !this.state.error && this.state.results &&
+              <>
+                { this.state.results.length == 0 ? <h2>No posts found</h2> :
+                  <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
+                    {this.state.results.map(result => {
+                      const { id, data } = result
+                      // just because id isn't in the _source object in elasticsearch
+                      data.id = id
+                      return (
+                        <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
+                          <ResultCard data={data} />
+                        </li>
+                      )
+                    })}
+                  </ul>
+                }
+              </>
             }
+            { this.state.error && <h2>{this.state.error}</h2> }
           </section>
         </div>
-        { this.state.isLoading && 'Loading...' }
       </div>
     )
   }
