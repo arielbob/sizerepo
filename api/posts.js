@@ -146,6 +146,11 @@ router.post('/submit', upload.single('image'), async (req, res, next) => {
     try {
       finalImageBuffer = await sharp(file.buffer)
         .rotate(parseInt(imageRotation, 10) * 90)
+        .resize({
+          width: 800,
+          height: 800,
+          fit: 'inside'
+        })
         .toBuffer()
     } catch (err) {
       return next(err)

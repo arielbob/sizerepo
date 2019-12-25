@@ -7,6 +7,7 @@
     "build": "set NODE_ENV=production && webpack --config webpack.prod.js",
     "dev": "set NODE_ENV=development && webpack-dev-server --config webpack.dev.js",
     "api": "set NODE_ENV=development && node server.js",
+    "profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "migrate": "node-pg-migrate",
     "test": "jest"
   },
@@ -25,6 +26,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "formik": "^2.0.4",
+    "helmet": "^3.21.2",
     "imagemin": "^7.0.1",
     "mmmagic": "^0.5.3",
     "morgan": "^1.9.1",

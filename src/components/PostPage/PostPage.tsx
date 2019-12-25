@@ -13,7 +13,7 @@ interface PostPageState {
 
 const PostImage: React.SFC<any> = ({ data }) => {
   return (
-    <img className='object-cover' src={data.image_url}></img>
+    <img className='object-contain' src={data.image_url}></img>
   )
 }
 
