@@ -10,23 +10,27 @@ const helmet = require('helmet')
 
 const app = express()
 const apiRoutes = require('./api/routes')
+const isProd = process.env.NODE_ENV.trim() === 'production'
 
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true } ))
 app.use(bodyParser.json())
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
+if (!isProd) {
+  // for webpack dev server
+  const whitelist = ['http://localhost:3000', 'http://localhost:8080']
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
     }
   }
+  app.use(cors(corsOptions))
 }
-app.use(cors(corsOptions))
 
 // app.use(session({
 //   secret: process.env.SESSION_SECRET,
