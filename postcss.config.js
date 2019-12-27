@@ -1,4 +1,4 @@
-// https://tailwindcss.com/docs/controlling-file-size for mor info
+// https://tailwindcss.com/docs/controlling-file-size for more info
 const purgecss = require('@fullhuman/postcss-purgecss')({
   // Specify the paths to all of the template files in your project
   content: [

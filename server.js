@@ -32,6 +32,8 @@ if (!isProd) {
   app.use(cors(corsOptions))
 }
 
+if (isProd) app.use(express.static('dist'))
+
 // app.use(session({
 //   secret: process.env.SESSION_SECRET,
 //   resave: false,
