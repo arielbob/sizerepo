@@ -1,3 +1,7 @@
+const isProd = process.env.NODE_ENV.trim() === 'production'
+
+exports.API_URL = isProd ? '' : 'http://localhost:3000'
+
 exports.CLOTHING_TYPES = {
   SHIRT: 'Shirt',
   PANTS: 'Pants',

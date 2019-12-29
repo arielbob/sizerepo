@@ -3,7 +3,7 @@ import axios from 'axios'
 import PostData from '../../types/post-data'
 import { buildSizingString, capFirst } from '../../util'
 import { metresToFeetString, kgsToLbsString } from '../../../common/util'
-import { CLOTHING_GENDERS_SHORT_TO_FULL, GENDERS_SHORT_TO_FULL } from '../../../common/constants'
+import { CLOTHING_GENDERS_SHORT_TO_FULL, GENDERS_SHORT_TO_FULL, API_URL } from '../../../common/constants'
 
 interface PostPageState {
   isLoading: boolean,
@@ -89,7 +89,8 @@ class PostPage extends React.Component<any, PostPageState> {
   componentDidMount() {
     this.setState({ isLoading: true })
     const { id } = this.props.match.params
-    axios.get('http://localhost:3000/api/posts/' + id)
+    const route = API_URL + '/api/posts/' + id
+    axios.get(route)
       .then(res => {
         this.setState({
           postData: res.data.data,

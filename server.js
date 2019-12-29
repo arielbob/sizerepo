@@ -1,6 +1,7 @@
-require('dotenv').config()
+// require('dotenv').config()
 
 const express = require('express')
+const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -17,21 +18,26 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true } ))
 app.use(bodyParser.json())
 
+console.log(process.env.NODE_ENV)
+let corsOptions
 if (!isProd) {
   // for webpack dev server
   const whitelist = ['http://localhost:3000', 'http://localhost:8080']
-  const corsOptions = {
+  corsOptions = {
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true)
       } else {
-        callback(new Error('Not allowed by CORS'))
+        const error = new Error('Not allowed by CORS')
+        error.status = 400
+        callback(error)
       }
     }
   }
-  app.use(cors(corsOptions))
 }
 
+// TODO: add cors whitelist with prod domain
+app.use(corsOptions ? cors(corsOptions) : cors())
 if (isProd) app.use(express.static('dist'))
 
 // app.use(session({
@@ -54,11 +60,9 @@ if (isProd) app.use(express.static('dist'))
 app.use('/api', apiRoutes)
 
 app.use((req, res, next) => {
-  res.status(404)
-
   res.format({
     'text/html': () => {
-      res.send('<h1>Page not found</h1>')
+      res.sendFile(path.join(__dirname, 'dist/index.html'))
     },
     'application/json': () => {
       res.json({ message: 'Not found' })

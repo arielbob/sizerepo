@@ -11,7 +11,8 @@ import {
   CLOTHING_SIZES,
   GENDERS,
   HEIGHT_UNITS,
-  WEIGHT_UNITS
+  WEIGHT_UNITS,
+  API_URL
 } from '../../../common/constants'
 
 const PAGES = {
@@ -125,7 +126,7 @@ class NewPost extends React.Component {
     fd.append('clothing', JSON.stringify(this.state.formValues.clothing))
     fd.append('body', JSON.stringify(this.state.formValues.body))
 
-    const route = 'http://localhost:3000/api/posts/submit'
+    const route = API_URL + '/api/posts/submit'
 
     this.setState({
       isLoading: true,

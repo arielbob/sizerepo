@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "set NODE_ENV=production && webpack --config webpack.prod.js",
-    "dev": "set NODE_ENV=development && webpack-dev-server --config webpack.dev.js",
-    "api": "set NODE_ENV=development && node server.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "api": "cross-env NODE_ENV=development node server.js",
     "profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "migrate": "node-pg-migrate",
     "test": "jest"
@@ -22,6 +23,7 @@
     "body-parser": "^1.19.0",
     "condense-whitespace": "^2.0.0",
     "cors": "^2.8.5",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",

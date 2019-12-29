@@ -3,7 +3,7 @@ import axios from 'axios'
 import queryString from 'query-string'
 import Search from '../Search/Search'
 import { ResultCard } from '../PostCard'
-import { HEIGHT_UNITS, WEIGHT_UNITS, CLOTHING_GENDERS_SHORT_TO_FULL, QUERY_PARAM_TO_HEIGHT_UNITS, QUERY_PARAM_TO_WEIGHT_UNITS, GENDERS_SHORT_TO_FULL } from '../../../common/constants'
+import { HEIGHT_UNITS, WEIGHT_UNITS, CLOTHING_GENDERS_SHORT_TO_FULL, QUERY_PARAM_TO_HEIGHT_UNITS, QUERY_PARAM_TO_WEIGHT_UNITS, GENDERS_SHORT_TO_FULL, API_URL } from '../../../common/constants'
 import SearchFormInput from '../../types/search'
 import querySchema from '../../../common/validators/search-query'
 import { SearchQueryParams, SearchData } from '../../types/search'
@@ -184,7 +184,8 @@ class SearchPage extends React.Component<any, SearchPageState> {
     console.log('api query string:', apiQueryStr)
     // console.log('search data:', searchData)
 
-    axios.get('http://localhost:3000/api/search' + (apiQueryStr[0] === '?' ? '' : '?') + apiQueryStr)
+    const route = API_URL + '/api/search' + (apiQueryStr[0] === '?' ? '' : '?') + apiQueryStr
+    axios.get(route)
       .then(res => {
         this.setState({
           results: res.data.data.results,

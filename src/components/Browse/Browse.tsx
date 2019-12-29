@@ -5,6 +5,7 @@ import Search from '../Search/Search'
 import { RecentCard } from '../PostCard'
 import SearchFormInput from '../../types/search'
 import { convertSearchFormValuesToQueryParams } from '../../util'
+import { API_URL } from '../../../common/constants'
 
 interface BrowseProps {
   history: any;
@@ -31,7 +32,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
   }
 
   fetchPosts() {
-    const route = 'http://localhost:3000/api/posts'
+    const route = API_URL + '/api/posts'
     axios.get(route)
       .then(res => {
         this.setState({
