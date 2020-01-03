@@ -48,7 +48,7 @@ const init = async () => {
   client.indices.getMapping({
     index: process.env.ES_INDEX
   })
-    .then(res => console.log('mappings:', res.body.fitrepo.mappings.properties))
+    .then(res => console.log('mappings:', res.body[process.env.ES_INDEX].mappings.properties))
     .catch(console.error)
 }
 
