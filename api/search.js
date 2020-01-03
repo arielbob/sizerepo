@@ -163,7 +163,7 @@ router.get('/', async (req, res, next) => {
     let searchResponse
     try {
       searchResponse = await es.search({
-        index: 'fitrepo',
+        index: process.env.ES_INDEX,
         body: {
           from: parseInt(page) - 1 || 0,
           size: MAX_RESULTS_SIZE,
