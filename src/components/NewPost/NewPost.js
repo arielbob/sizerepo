@@ -147,7 +147,7 @@ class NewPost extends React.Component {
         isLoading: false,
         image: {
           ...this.state.image,
-          error: err.response.data.message
+          error: err.response ? err.response.data.message : 'Could not create post'
         }
       })
     })
