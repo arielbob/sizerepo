@@ -1,5 +1,7 @@
+// interface for the search form fields
 export default interface SearchFormInput {
   query: string, 
+  page: string,
   articleGender: string,
   articleType: string,
   articleSize: string,
@@ -15,9 +17,10 @@ export default interface SearchFormInput {
   gender: string 
 }
 
+// interface for /search url query parameters
 export interface SearchQueryParams {
   query: string,
-  page: number,
+  page: string,
   article_gender: string,
   type: string,
   size: string,
@@ -36,7 +39,7 @@ export interface SearchQueryParams {
 // search api request data schema
 export interface SearchData {
   query: string,
-  page: number,
+  page: string,
   article_gender: string,
   type: string,
   size: string,

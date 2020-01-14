@@ -7,50 +7,7 @@ const { CLOTHING_TYPES } = require('../common/constants')
 const es = require('./es')
 const postsService = require('../services/posts')
 
-const MAX_RESULTS_SIZE = 10
-
-const convertUnits = (body) => {
-  // convert height to metres
-  if (body.heightUnits === HEIGHT_UNITS.FT_IN) {
-    const inches = parseInt(body.heightFeet, 10) * 12 + parseInt(body.heightInches)
-    body.height = 0.0254 * inches
-  } else {
-    body.height = parseInt(body.heightCm) / 100
-  }
-
-  // convert weight to kgs
-  if (body.weightUnits === WEIGHT_UNITS.LBS) {
-    body.weight = 0.45359237 * body.weightLbs
-  } else {
-    body.weight = body.weightKgs
-  }
-}
-
-// convert form values to db enum values
-// TODO: make conversions explicit somewhere
-const convertGenders = (clothing, body) => {
-  clothing.gender = clothing.gender[0].toLowerCase()
-  body.gender = body.gender[0].toLowerCase()
-}
-
-const convertArticleType = (clothing) => {
-  clothing.type = clothing.type.toLowerCase()
-}
-
-const convertArticleSize = (clothing) => {
-  if (clothing.size) {
-    clothing.size = clothing.size.toLowerCase()
-  }
-}
-
-const removeExtraneousData = (clothing) => {
-  if (clothing.type === CLOTHING_TYPES.PANTS || clothing.type === CLOTHING_TYPES.SHORTS) {
-    clothing.size = null
-  } else {
-    clothing.waist = null
-    clothing.inseam = null
-  }
-}
+const MAX_RESULTS_SIZE = 12
 
 router.get('/', async (req, res, next) => {
   try {
@@ -63,9 +20,11 @@ router.get('/', async (req, res, next) => {
       inseam,
       height,
       weight,
-      gender,
-      page
+      gender
     } = req.query
+
+    // page starts at 1
+    const page = parseInt(req.query.page) || 1
 
     const clothing = {
       gender: article_gender,
@@ -160,16 +119,19 @@ router.get('/', async (req, res, next) => {
       match: { gender: { query: body.gender } }
     })
 
+    // we get MAX_RESULTS_SIZE + 1 to check if more results exist after the current page
     let searchResponse
     try {
+      const offset = (page - 1) * MAX_RESULTS_SIZE
       searchResponse = await es.search({
         index: process.env.ES_INDEX,
         body: {
-          from: parseInt(page) - 1 || 0,
-          size: MAX_RESULTS_SIZE,
+          from: offset,
+          size: MAX_RESULTS_SIZE + 1,
           query: {
             bool: {
-              must, should
+              must,
+              should
             }
           }
         }
@@ -181,12 +143,21 @@ router.get('/', async (req, res, next) => {
       return next(searchErr)
     }
 
+    const results = searchResponse.body.hits.hits.map(r => ({
+      id: r._id,
+      data: r._source
+    }))
+
+    const hasPrev = page > 1
+    const hasNext = results.length > MAX_RESULTS_SIZE
+    if (hasNext) results.pop()
+
     return res.status(200).json({
       data: {
-        results: searchResponse.body.hits.hits.map(r => ({
-          id: r._id,
-          data: r._source
-        }))
+        results,
+        page,
+        hasPrev,
+        hasNext
       }
     })
   } catch (err) {
