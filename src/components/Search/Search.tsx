@@ -96,7 +96,7 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
             <div className='mt-2 flex flex-row-reverse'>
               <button
                 type='submit'
-                className='items-center flex bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+                className='items-center flex bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded'
               >
                 <svg className="mr-1 fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                   <path d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"></path>
