@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import PostData from '../../types/post-data'
 import { buildSizingString, capFirst } from '../../util'
-import { metresToFeetString, kgsToLbsString } from '../../../common/util'
-import { CLOTHING_GENDERS_SHORT_TO_FULL, GENDERS_SHORT_TO_FULL, API_URL } from '../../../common/constants'
+import { metresToFeetString, metresToCmString, kgsToLbsString, kgsToKgsString } from '../../../common/util'
+import { CLOTHING_GENDERS_SHORT_TO_FULL, GENDERS_SHORT_TO_FULL, UNITS, API_URL } from '../../../common/constants'
 
 interface PostPageState {
   isLoading: boolean,
@@ -17,7 +17,7 @@ const PostImage: React.SFC<any> = ({ data }) => {
   )
 }
 
-const PostInfo: React.SFC<any> = ({ data }) => {
+const PostInfo: React.SFC<any> = ({ data, units }) => {
   const {
     id,
     brand,
@@ -60,11 +60,19 @@ const PostInfo: React.SFC<any> = ({ data }) => {
         <div className='flex'>
           <div className='mr-8'>
             <div className='text-gray-600 text-sm'>Height</div>
-            <span className='font-mono text-lg'>{metresToFeetString(height_m)}</span>
+            {
+              units === UNITS.METRIC ?
+              <span className='font-mono text-lg'>{metresToFeetString(height_m)}</span> :
+              <span className='font-mono text-lg'>{metresToCmString(height_m)}</span>
+            }
           </div>
           <div>
             <div className='text-gray-600 text-sm'>Weight</div>
-            <span className='font-mono text-lg'>{kgsToLbsString(weight_kg)}</span>
+            {
+              units === UNITS.METRIC ?
+              <span className='font-mono text-lg'>{kgsToLbsString(weight_kg)}</span> :
+              <span className='font-mono text-lg'>{kgsToKgsString(weight_kg)}</span>
+            }
           </div>
         </div>
         <div>
@@ -114,7 +122,7 @@ class PostPage extends React.Component<any, PostPageState> {
             { this.state.postData && <PostImage data={this.state.postData} /> }
           </div>
           <div className='w-full p-3 md:w-7/12'>
-            { !this.state.error && this.state.postData && <PostInfo data={this.state.postData} /> }
+            { !this.state.error && this.state.postData && <PostInfo data={this.state.postData} units={this.props.units} /> }
             { this.state.error && <h2>{this.state.error}</h2> }
           </div>
         </div>

@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
-    "api": "cross-env NODE_ENV=development node server.js",
+    "api": "cross-env NODE_ENV=development ts-node server.js",
     "profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "migrate": "node-pg-migrate",
     "test": "jest"
@@ -74,7 +74,8 @@
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^2.3.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.3",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",

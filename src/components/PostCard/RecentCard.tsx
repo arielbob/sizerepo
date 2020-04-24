@@ -4,7 +4,7 @@ import PostInfo from './PostInfo'
 import { Link } from 'react-router-dom'
 
 // TODO: probably don't have the images so large on large breakpoint
-const RecentCard: React.SFC<PostCardProps> = ({ data }) => {
+const RecentCard: React.SFC<PostCardProps> = ({ data, units }) => {
   const {
     id,
     image_url,
@@ -15,7 +15,7 @@ const RecentCard: React.SFC<PostCardProps> = ({ data }) => {
         <img className='object-cover h-full w-full' src={image_url}></img>
       </Link>
       <div className='w-9/12 h-24 md:w-full'>
-        <PostInfo data={data} />
+        <PostInfo data={data} units={units} />
       </div>
     </div>
   )

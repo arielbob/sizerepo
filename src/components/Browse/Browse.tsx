@@ -5,10 +5,11 @@ import Search from '../Search/Search'
 import { RecentCard } from '../PostCard'
 import SearchFormInput from '../../types/search'
 import { convertSearchFormValuesToQueryParams } from '../../util'
-import { API_URL } from '../../../common/constants'
+import { API_URL, UNITS } from '../../../common/constants'
 
 interface BrowseProps {
   history: any;
+  units: UNITS;
 }
 
 interface BrowseState {
@@ -77,7 +78,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
               <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
                 {this.state.posts.map(data => (
                   <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2 md:mb-4' key={data.id}>
-                    <RecentCard data={data} />
+                    <RecentCard units={this.props.units} data={data} />
                   </li>
                 ))}
               </ul>
