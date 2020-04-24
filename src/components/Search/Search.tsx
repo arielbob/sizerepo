@@ -22,7 +22,7 @@ interface SearchState {
   isBodyOpen: boolean;
 }
 
-class Search extends React.Component<SearchProps, SearchState> {
+class Search extends React.PureComponent<SearchProps, SearchState> {
   constructor(props) {
     super(props)
     this.state = {

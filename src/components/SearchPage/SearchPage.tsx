@@ -32,6 +32,7 @@ class SearchPage extends React.Component<any, SearchPageState> {
       searchValues: null,
       error: ''
     }
+    this.onSearch = this.onSearch.bind(this)
   }
 
   componentDidMount() {
@@ -105,14 +106,18 @@ class SearchPage extends React.Component<any, SearchPageState> {
     return queryString.stringify(query)
   }
 
+  onSearch(values) {
+    this.updateSearchURL(values, true)
+  }
+
   render() {
     console.log(this.props.match.params)
     return (
       <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='-mx-2 flex flex-col md:flex-row'>
           <section className='w-full px-2 md:max-w-xl mx-auto mb-4 md:w-1/3 md:pt-8'> 
-            <div className='bg-white border rounded p-3 sticky'>
-              <Search initialValues={this.state.searchValues} onSearch={(data) => this.updateSearchURL(data, true)} />
+            <div className='bg-white rounded p-3 sticky'>
+              <Search initialValues={this.state.searchValues} onSearch={this.onSearch} />
             </div>
           </section>
           <section className='w-full px-2 md:w-2/3'> 
@@ -130,7 +135,7 @@ class SearchPage extends React.Component<any, SearchPageState> {
                       data.id = id
                       return (
                         <li className='w-full border-b last:border-b-0 sm:border-none sm:px-1 sm:mb-2 sm:w-1/3 lg:w-1/4' key={id}>
-                          <ResultCard data={data} />
+                          <ResultCard data={data} units={this.props.units} />
                         </li>
                       )
                     })}

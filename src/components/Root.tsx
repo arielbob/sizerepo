@@ -36,7 +36,9 @@ class Root extends React.Component<{}, RootState> {
           <Route exact path='/' render={
             (props) => <Browse {...props} units={this.state.units} />
           } />
-          <Route path='/search' component={SearchPage} />
+          <Route path='/search' render={
+            (props) => <SearchPage {...props} units={this.state.units} />
+          } />
           <Route path='/post' component={NewPost} />
           <Route path='/posts/:id' render={
             (props) => <PostPage {...props} units={this.state.units} />

@@ -13,9 +13,9 @@ const getTransform = (rotation, clientWidth, clientHeight) => {
   return str
 }
 
-class ImageUpload extends React.Component {
-  constructor() {
-    super()
+class ImageUpload extends React.PureComponent {
+  constructor(props) {
+    super(props)
     this.containerRef = React.createRef()
   }
 

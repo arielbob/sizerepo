@@ -37,6 +37,7 @@ router.get('/', async (req, res, next) => {
       height, weight, gender
     }
 
+    // TODO: don't condense whitespace here, just do it client-side
     if (query) query = condenseWhitespace(query)
     for (let [k, v] of Object.entries(clothing)) {
       if (clothing[k]) clothing[k] = condenseWhitespace(v)

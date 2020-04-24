@@ -88,4 +88,4 @@ const ClothingDetails = ({ formValues, onNextClick }) => {
   )
 }
 
-export default ClothingDetails
+export default React.memo(ClothingDetails)

@@ -26,6 +26,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
       posts: null,
       error: ''
     }
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
       <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='w-full md:max-w-lg mx-auto'>
           <div className='mb-4 bg-white rounded p-3'>
-            <Search onSearch={(values) => this.handleSearch(values)} />
+            <Search onSearch={this.handleSearch} />
           </div>
         </div>
         <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>

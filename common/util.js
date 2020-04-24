@@ -12,7 +12,7 @@ exports.metresToFeetString = (metres) => {
 }
 
 exports.metresToCmString = (metres) => {
-  return (parseFloat(metres) * 100).toString() + 'cm'
+  return (parseFloat(metres) * 100).toFixed(2).toString() + 'cm'
 }
 
 exports.kgsToLbsString = (kgs) => {

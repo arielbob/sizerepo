@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Field, ErrorMessage } from 'formik'
 import { Label, BasicInput, BasicSelect, BasicError } from '../Form/'
 import {
@@ -56,4 +56,4 @@ const ClothingFilters = ({ formik, isOpen }) => (
   </div>
 )
 
-export default ClothingFilters
+export default React.memo(ClothingFilters)

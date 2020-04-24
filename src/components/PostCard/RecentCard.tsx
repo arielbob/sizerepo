@@ -10,7 +10,7 @@ const RecentCard: React.SFC<PostCardProps> = ({ data, units }) => {
     image_url,
   } = data
   return (
-    <div className='flex flex-row h-40 bg-white w-full p-3 md:h-auto md:rounded md:flex-col'>
+    <div className='flex flex-row h-40 bg-white w-full p-3 h-full md:rounded md:flex-col'>
       <Link to={'/posts/' + id} className='overflow-hidden w-3/12 rounded mr-3 md:mr-0 md:mb-2 md:w-full md:h-56'>
         <img className='object-cover h-full w-full' src={image_url}></img>
       </Link>

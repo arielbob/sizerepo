@@ -22,9 +22,13 @@ const PAGES = {
 }
 const PAGES_ORDER = [PAGES.CLOTHING, PAGES.BODY, PAGES.REVIEW]
 
-class NewPost extends React.Component {
-  constructor() {
-    super()
+interface NewPostProps {
+  history: any;
+}
+
+class NewPost extends React.Component<NewPostProps, any> {
+  constructor(props) {
+    super(props)
     this.state = {
       currentPageIndex: 0,
       image: {
@@ -57,9 +61,13 @@ class NewPost extends React.Component {
     }
   }
 
-  nextPage(values) {
+  componentDidMount() {
+    console.log('remounting')
+  }
+
+  nextPage(values = null) {
     const { currentPageIndex } = this.state
-    const newPageIndex = (currentPageIndex + 1 >= PAGES.length) ? (PAGES.length - 1) : currentPageIndex + 1
+    const newPageIndex = Math.min(currentPageIndex + 1, PAGES_ORDER.length - 1)
     this.setState({ currentPageIndex: newPageIndex })
     this.setState({
       currentPageIndex: newPageIndex,
@@ -70,7 +78,7 @@ class NewPost extends React.Component {
     })
   }
 
-  prevPage(values) {
+  prevPage(values = null) {
     const { currentPageIndex } = this.state
     const newPageIndex = (currentPageIndex - 1 >= 0) ? (currentPageIndex - 1) : 0
     this.setState({
@@ -153,6 +161,8 @@ class NewPost extends React.Component {
     })
   }
 
+  // TODO: the anonymous functions should be declared elsewhere so that they don't
+  // get recreated on every render and we don't have to re-render components that use them
   render() {
     const currentPage = PAGES_ORDER[this.state.currentPageIndex]
     const hasNext = this.state.currentPageIndex < PAGES_ORDER.length - 1
