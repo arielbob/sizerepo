@@ -22,11 +22,11 @@ const PostInfo: React.SFC<PostCardProps> = ({ data, units }) => {
   } = data
 
   return (
-    <div className='leading-tight text-gray-800'>
+    <div className='leading-tight'>
       <Link to={'/posts/' + id}>
         <div className='text-sm text-gray-600 font-mono truncate'>{brand}</div>
         <div className='flex items-center mb-2'>
-          <h2 className='truncate inline-block mr-2 text-gray-800 font-semibold'>{article_name}</h2>
+          <h2 className='truncate inline-block mr-2 font-semibold'>{article_name}</h2>
           <span className='flex-shrink-0 inline-block font-mono rounded-full px-2 border border-gray-700 text-xs'>
             {buildSizingString(article_size, article_waist, article_inseam, false)}
           </span>

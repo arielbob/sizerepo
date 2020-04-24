@@ -169,7 +169,7 @@ class NewPost extends React.Component<NewPostProps, any> {
 
     return (
       <section className='my-8 px-2'>
-        <div className='mx-auto bg-white rounded text-gray-800 flex flex-col overflow-hidden md:h-580 max-w-4xl md:flex-row'>
+        <div className='mx-auto bg-white rounded flex flex-col overflow-hidden md:h-580 max-w-4xl md:flex-row'>
           <div className='w-full h-580 md:w-5/12 md:h-auto'>
             <ImageUpload
               imageUrl={this.state.image.url}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Label = ({ labelName }) => (
-  <label className='block text-sm mb-1 text-gray-800'>{labelName}</label>
+  <label className='block text-sm mb-1 text-gray-900'>{labelName}</label>
 )
 
 export const BasicInput = ({ field, form: { touched, errors }, suffix, onChange, placeholder }) => {

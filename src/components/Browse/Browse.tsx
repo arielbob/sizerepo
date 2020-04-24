@@ -63,7 +63,7 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
 
   render() {
     return (
-      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
+      <div className='container px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='w-full md:max-w-lg mx-auto'>
           <div className='mb-4 bg-white rounded p-3'>
             <Search onSearch={this.handleSearch} />

@@ -31,19 +31,21 @@ class Root extends React.Component<{}, RootState> {
   render () {
     return (
       <Router>
-        <Navbar onUnitsChange={(units: UNITS) => this.handleUnitsChange(units)}/>
-        <Switch>
-          <Route exact path='/' render={
-            (props) => <Browse {...props} units={this.state.units} />
-          } />
-          <Route path='/search' render={
-            (props) => <SearchPage {...props} units={this.state.units} />
-          } />
-          <Route path='/post' component={NewPost} />
-          <Route path='/posts/:id' render={
-            (props) => <PostPage {...props} units={this.state.units} />
-          } />
-        </Switch>
+        <div className='text-gray-900'>
+          <Navbar onUnitsChange={(units: UNITS) => this.handleUnitsChange(units)}/>
+          <Switch>
+              <Route exact path='/' render={
+                (props) => <Browse {...props} units={this.state.units} />
+              } />
+              <Route path='/search' render={
+                (props) => <SearchPage {...props} units={this.state.units} />
+              } />
+              <Route path='/post' component={NewPost} />
+              <Route path='/posts/:id' render={
+                (props) => <PostPage {...props} units={this.state.units} />
+              } />
+          </Switch>
+        </div>
       </Router>
     )
   }

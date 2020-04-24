@@ -9,7 +9,7 @@ interface NavbarProps {
 
 const Navbar: React.SFC<NavbarProps> = ({ onUnitsChange }) => {
   return (
-    <nav className='border-b bg-white text-lg font-semibold text-gray-800 p-3'>
+    <nav className='bg-white text-lg font-semibold p-3'>
       <ul className='flex justify-center items-center'>
         <li className='mr-8'>
           <Link

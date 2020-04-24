@@ -34,7 +34,7 @@ const PostInfo: React.SFC<any> = ({ data, units }) => {
     created_at
   } = data
   return (
-    <div className='text-gray-800 w-full flex flex-col items-start'>
+    <div className='w-full flex flex-col items-start'>
       <div className='flex justify-between w-full'>
         <div className='text-xl font-mono'>{brand}</div>
         <div className=''>
@@ -44,7 +44,7 @@ const PostInfo: React.SFC<any> = ({ data, units }) => {
       </div>
       <div className='mb-4 leading-tight'>
         <div className='flex items-center mb-2'>
-          <h2 className='text-3xl inline-block mr-2 text-gray-800 font-semibold'>{article_name}</h2>
+          <h2 className='text-3xl inline-block mr-2 font-semibold'>{article_name}</h2>
         </div>
         <span className='inline-block font-mono rounded-full px-2 border border-gray-700 text-lg'>
           {buildSizingString(article_size, article_waist, article_inseam, true)}
@@ -117,7 +117,7 @@ class PostPage extends React.Component<any, PostPageState> {
   render() {
     return (
       <section className='my-8 px-2'>
-        <div className='mx-auto overflow-hidden flex flex-col md:flex-row md:h-580 max-w-4xl bg-white rounded text-gray-800'>
+        <div className='mx-auto overflow-hidden flex flex-col md:flex-row md:h-580 max-w-4xl bg-white rounded'>
           <div className='w-full h-580 flex justify-center md:flex-col md:h-auto md:w-5/12 bg-black'>
             { this.state.postData && <PostImage data={this.state.postData} /> }
           </div>

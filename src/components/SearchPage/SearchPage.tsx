@@ -113,7 +113,7 @@ class SearchPage extends React.Component<any, SearchPageState> {
   render() {
     console.log(this.props.match.params)
     return (
-      <div className='container text-gray-800 px-2 break-all overflow-hidden mx-auto my-8'>
+      <div className='container px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='-mx-2 flex flex-col md:flex-row'>
           <section className='w-full px-2 md:max-w-xl mx-auto mb-4 md:w-1/3 md:pt-8'> 
             <div className='bg-white rounded p-3 sticky'>

@@ -65,7 +65,7 @@ class ImageUpload extends React.PureComponent {
             <div className='absolute px-2 pb-2 flex w-full justify-between self-end'>
               <label
                 htmlFor='image-upload'
-                className='block bg-white hover:bg-gray-200 self-center px-3 text-gray-800 font-semibold rounded-full cursor-pointer'>
+                className='block bg-white hover:bg-gray-200 self-center px-3 font-semibold rounded-full cursor-pointer'>
                 Replace image
               </label>
               <input
@@ -75,7 +75,7 @@ class ImageUpload extends React.PureComponent {
                 accept={ACCEPTED_FILETYPES}
                 onChange={this.props.onFileChange} />
               <button
-                className='block bg-white hover:bg-gray-200 px-1 text-gray-800 rounded-full cursor-pointer'
+                className='block bg-white hover:bg-gray-200 px-1 rounded-full cursor-pointer'
                 onClick={this.props.onRotateClick}>
                 <svg className='inline fill-current h-4 w-4' xmlns='http://www.w3.org/2000/svg' viewBox='0 2 24 24'>
                   <path xmlns="http://www.w3.org/2000/svg" d="M20.3 13.43a1 1 0 0 0-1.25.65A7.14 7.14 0 0 1 12.18 19 7.1 7.1 0 0 1 5 12a7.1 7.1 0 0 1 7.18-7 7.26 7.26 0 0 1 4.65 1.67l-2.17-.36a1 1 0 0 0-1.15.83 1 1 0 0 0 .83 1.15l4.24.7h.17a1 1 0 0 0 .34-.06.33.33 0 0 0 .1-.06.78.78 0 0 0 .2-.11l.09-.11c0-.05.09-.09.13-.15s0-.1.05-.14a1.34 1.34 0 0 0 .07-.18l.75-4a1 1 0 0 0-2-.38l-.27 1.45A9.21 9.21 0 0 0 12.18 3 9.1 9.1 0 0 0 3 12a9.1 9.1 0 0 0 9.18 9A9.12 9.12 0 0 0 21 14.68a1 1 0 0 0-.7-1.25z"/>
