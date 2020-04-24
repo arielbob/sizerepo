@@ -117,7 +117,7 @@ class PostPage extends React.Component<any, PostPageState> {
   render() {
     return (
       <section className='my-8 px-2'>
-        <div className='mx-auto overflow-hidden flex flex-col md:flex-row md:h-580 max-w-4xl bg-white rounded border text-gray-800'>
+        <div className='mx-auto overflow-hidden flex flex-col md:flex-row md:h-580 max-w-4xl bg-white rounded text-gray-800'>
           <div className='w-full h-580 flex justify-center md:flex-col md:h-auto md:w-5/12 bg-black'>
             { this.state.postData && <PostImage data={this.state.postData} /> }
           </div>
