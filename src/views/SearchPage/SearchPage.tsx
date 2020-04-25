@@ -1,13 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import queryString from 'query-string'
-import Search from '../Search/Search'
-import { ResultCard } from '../PostCard'
+import Search from '../../components/Search/Search'
+import { ResultCard } from '../../components/PostCard'
 import { API_URL } from '../../../common/constants'
 import SearchFormInput from '../../types/search'
 import { SearchQueryParams, SearchData } from '../../types/search'
 import { convertSearchFormValuesToQueryParams, generateQueryHeight, convertQueryParamsToFormValues, convertQueryParamsToSearchData } from '../../util'
-import { FormButton } from '../Form'
+import { FormButton } from '../../components/Form'
 import { Link } from 'react-router-dom'
 
 interface SearchPageState {

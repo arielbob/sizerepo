@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Select, FormButton } from '../Form/'
+import { Input, Select, FormButton } from '../../components/Form'
 import { CLOTHING_TYPES, HEIGHT_UNITS, WEIGHT_UNITS } from '../../../common/constants'
 
 const Title = ({ title }) => {

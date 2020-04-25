@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Label, BasicInput, BasicSelect, BasicError, FormButton } from '../Form/'
+import { Label, BasicInput, BasicSelect, BasicError, FormButton } from '../../components/Form'
 import { CLOTHING_TYPES, CLOTHING_GENDERS, CLOTHING_SIZES } from '../../../common/constants'
 import validate from '../../../common/validators/clothing'
 import { handleNumberChange } from '../../util'

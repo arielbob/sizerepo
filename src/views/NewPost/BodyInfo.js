@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Label, BasicInput, BasicSelect, BasicError, FormButton } from '../Form/'
+import { Label, BasicInput, BasicSelect, BasicError, FormButton } from '../../components/Form'
 import validate from '../../../common/validators/body'
 import {
   GENDERS,

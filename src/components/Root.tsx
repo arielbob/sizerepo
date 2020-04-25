@@ -5,10 +5,10 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './Navbar/Navbar'
-import Browse from './Browse/Browse'
-import SearchPage from './SearchPage/SearchPage'
-import NewPost from './NewPost/NewPost'
-import PostPage from './PostPage/PostPage'
+import Browse from '../views/Browse/Browse'
+import SearchPage from '../views/SearchPage/SearchPage'
+import NewPost from '../views/NewPost/NewPost'
+import PostPage from '../views/PostPage/PostPage'
 import { UNITS } from '../../common/constants';
 
 interface RootState {
