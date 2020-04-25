@@ -9,7 +9,7 @@ import {
 import { handleNumberChange } from '../../util'
 
 const BodyFilters = ({ formik, isOpen }) => (
-  <div className={'mb-3 flex flex-col md:max-w-md' + (isOpen ? '' : ' hidden')}>
+  <div className={'mb-3 flex flex-col px-2 md:max-w-md' + (isOpen ? '' : ' hidden')}>
     <div className='flex -mx-2'>
       <div className='w-1/3 px-2'><Label labelName='Height' /></div>
       {formik.values.heightUnits === 'ft/in' ? <div className='w-1/3 px-2'></div> : null}

@@ -9,7 +9,7 @@ import {
 import { handleNumberChange } from '../../util'
 
 const ClothingFilters = ({ formik, isOpen }) => (
-  <div className={'flex flex-col mb-3 md:max-w-xl' + (isOpen ? '' : ' hidden')}>
+  <div className={'flex flex-col px-2 mb-3 md:max-w-xl' + (isOpen ? '' : ' hidden')}>
     <div className='flex -mx-2 mb-3'>
       <div className='w-1/2 px-2'>
         <Label labelName='Gender' />

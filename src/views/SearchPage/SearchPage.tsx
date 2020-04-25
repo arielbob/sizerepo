@@ -114,21 +114,21 @@ class SearchPage extends React.Component<any, SearchPageState> {
     console.log(this.props.match.params)
     return (
       <div className='container px-2 break-all overflow-hidden mx-auto my-8'>
+        <h2 className='text-2xl font-bold mb-1'>Results</h2>
         <div className='-mx-2 flex flex-col md:flex-row'>
-          <section className='w-full px-2 md:max-w-xl mx-auto mb-4 md:w-1/3 md:pt-8'> 
+          <section className='w-full px-2 md:max-w-xl mx-auto mb-4 md:w-1/3'> 
             <div className='bg-white rounded p-3 sticky'>
               <Search initialValues={this.state.searchValues} onSearch={this.onSearch} />
             </div>
           </section>
-          <section className='w-full px-2 md:w-2/3'> 
-            <h2 className='text-xl font-bold mb-1'>Results</h2>
+          <section className='w-full px-2 pb-2 md:w-2/3'> 
             { this.state.isLoading && <h2>Loading...</h2> }
             {
               !this.state.error && !this.state.isLoading && this.state.results &&
               <>
                 {
                   this.state.results.length == 0 ? <h2>No posts found</h2> :
-                  <ul className='rounded overflow-hidden border sm:border-0 sm:flex sm:flex-wrap sm:-mx-2'>
+                  <ul className='rounded overflow-hidden sm:border-0 sm:flex sm:flex-wrap'>
                     {this.state.results.map(result => {
                       const { id, data } = result
                       // just because id isn't in the _source object in elasticsearch

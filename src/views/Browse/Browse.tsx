@@ -65,29 +65,31 @@ class Browse extends React.Component<BrowseProps, BrowseState> {
     return (
       <div className='container px-2 break-all overflow-hidden mx-auto my-8'>
         <div className='w-full md:max-w-lg mx-auto'>
-          <div className='mb-4 bg-white rounded p-3'>
+          <div className='mb-8 bg-white rounded p-3'>
             <Search onSearch={this.handleSearch} />
           </div>
         </div>
-        <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>
-        { this.state.isLoading && <h2>Loading...</h2> }
-        {
-          !this.state.error && !this.state.isLoading && this.state.posts &&
-          <>
-            { this.state.posts.length === 0 ? <h2>No recent posts</h2> : 
-            <div className='border md:border-0 md:-mx-1 rounded overflow-hidden mb-8 scrollbar-hidden'>
-              <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
-                {this.state.posts.map(data => (
-                  <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2 md:mb-4' key={data.id}>
-                    <RecentCard units={this.props.units} data={data} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            }
-          </>
-        }
-        { this.state.error && <h2>{this.state.error}</h2> }
+        <div className='rounded overflow-hidden scrollbar-hidden'>
+          <h1 className='text-xl font-bold mb-2'>Recently Posted</h1>
+          { this.state.isLoading && <h2>Loading...</h2> }
+          {
+            !this.state.error && !this.state.isLoading && this.state.posts &&
+            <>
+              { this.state.posts.length === 0 ? <h2>No recent posts</h2> : 
+              <div className='md:border-0 md:-mx-1 rounded overflow-hidden scrollbar-hidden'>
+                <ul className='overflow-x-auto whitespace-no-wrap scrolling-touch'>
+                  {this.state.posts.map(data => (
+                    <li className='block border-b md:border-b-0 last:border-b-0 md:w-56 lg:w-1/5 md:inline-block md:px-2' key={data.id}>
+                      <RecentCard units={this.props.units} data={data} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              }
+            </>
+          }
+          { this.state.error && <h2>{this.state.error}</h2> }
+        </div>
       </div>
     )
   }
