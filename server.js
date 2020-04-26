@@ -13,6 +13,11 @@ const app = express()
 const apiRoutes = require('./api/routes')
 const isProd = process.env.NODE_ENV.trim() === 'production'
 
+// this isn't really necessary since nginx we set the Host header to the original host in nginx,
+// but we set it just in case X-Forwarded-Host is the only header available
+// https://expressjs.com/en/guide/behind-proxies.html
+app.set('trust proxy', true)
+
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true } ))
@@ -22,7 +27,7 @@ console.log(process.env.NODE_ENV)
 const whitelist = isProd ? ['http://sizerepo.com', 'https://sizerepo.com'] : ['http://localhost:3000', 'http://localhost:8080']
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       const error = new Error('Not allowed by CORS')
