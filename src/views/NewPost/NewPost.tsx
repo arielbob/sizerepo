@@ -61,10 +61,6 @@ class NewPost extends React.Component<NewPostProps, any> {
     }
   }
 
-  componentDidMount() {
-    console.log('remounting')
-  }
-
   nextPage(values = null) {
     const { currentPageIndex } = this.state
     const newPageIndex = Math.min(currentPageIndex + 1, PAGES_ORDER.length - 1)
@@ -90,6 +86,7 @@ class NewPost extends React.Component<NewPostProps, any> {
     })
   }
 
+  // FIXME: visual rotation and actual rotation differ when no rotation is performed on an image
   handleFileChange(file) {
     URL.revokeObjectURL(this.state.image.url)
     if (file) {

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 // const bluebird = require('bluebird')
 require('dotenv').config()
+const limiter15Mins = require('../common/util').limiter15Mins
 const condenseWhitespace = require('condense-whitespace')
 const { CLOTHING_TYPES } = require('../common/constants')
 
@@ -9,7 +10,7 @@ const postsService = require('../services/posts')
 
 const MAX_RESULTS_SIZE = 12
 
-router.get('/', async (req, res, next) => {
+router.get('/', limiter15Mins(300), async (req, res, next) => {
   try {
     let {
       query,

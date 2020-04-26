@@ -6,12 +6,15 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
+const limiter15Mins = require('./common/util').limiter15Mins
 // const session = require('express-session')
 // const passport = require('passport')
 
-const app = express()
 const apiRoutes = require('./api/routes')
 const isProd = process.env.NODE_ENV.trim() === 'production'
+const app = express()
+
+console.log(process.env.NODE_ENV)
 
 // this isn't really necessary since nginx we set the Host header to the original host in nginx,
 // but we set it just in case X-Forwarded-Host is the only header available
@@ -23,7 +26,6 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true } ))
 app.use(bodyParser.json())
 
-console.log(process.env.NODE_ENV)
 const whitelist = isProd ? ['http://sizerepo.com', 'https://sizerepo.com'] : ['http://localhost:3000', 'http://localhost:8080']
 const corsOptions = {
   origin: function (origin, callback) {
@@ -40,24 +42,7 @@ app.use(cors(corsOptions))
 
 if (isProd) app.use(express.static('dist'))
 
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// TODO: change these
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
-//
-// passport.deserializeUser(function(user, done) {
-//   done(null, user);
-// });
-
-app.use('/api', apiRoutes)
+app.use('/api', limiter15Mins(750), apiRoutes)
 
 app.use((req, res, next) => {
   res.format({

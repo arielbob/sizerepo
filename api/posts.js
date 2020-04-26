@@ -6,6 +6,7 @@ const mmm = require('mmmagic')
 const Magic = mmm.Magic
 const bluebird = require('bluebird')
 const condenseWhitespace = require('condense-whitespace');
+const limiter15Mins = require('../common/util').limiter15Mins
 require('dotenv').config()
 
 const { s3 } = require('./aws')
@@ -70,7 +71,7 @@ const removeExtraneousData = (clothing) => {
 // i.e. thrown errors will not be caught by handler
 // or just wrap it all in a try catch block, which is what i do
 // NOTE: all the individual try and catch blocks might be unnecessary
-router.post('/submit', upload.single('image'), async (req, res, next) => {
+router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, res, next) => {
   try {
     const { file } = req
     // NOTE: this is form data, so it's all strings

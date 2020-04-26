@@ -1,3 +1,5 @@
+const rateLimit = require('express-rate-limit')
+
 exports.metresToFeetString = (metres) => {
   const inches = parseFloat(metres) * 39.37
   let feet = Math.floor(inches / 12)
@@ -23,4 +25,17 @@ exports.kgsToLbsString = (kgs) => {
 exports.kgsToKgsString = (kgs) => {
   const roundedKgs = Math.round(kgs)
   return roundedKgs.toString() + ' kgs'
+}
+
+// create limiter middleware for 15 minute window
+exports.limiter15Mins = (max) => {
+  return rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: max,
+    handler: (req, res, next) => {
+      const error = new Error('Too many requests, please try again later.')
+      error.status = 429
+      next(error)
+    }
+  })
 }
