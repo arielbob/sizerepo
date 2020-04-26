@@ -19,25 +19,20 @@ app.use(bodyParser.urlencoded({ extended: true } ))
 app.use(bodyParser.json())
 
 console.log(process.env.NODE_ENV)
-let corsOptions
-if (!isProd) {
-  // for webpack dev server
-  const whitelist = ['http://localhost:3000', 'http://localhost:8080']
-  corsOptions = {
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true)
-      } else {
-        const error = new Error('Not allowed by CORS')
-        error.status = 400
-        callback(error)
-      }
+const whitelist = isProd ? ['http://sizerepo.com', 'https://sizerepo.com'] : ['http://localhost:3000', 'http://localhost:8080']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      const error = new Error('Not allowed by CORS')
+      error.status = 400
+      callback(error)
     }
   }
 }
+app.use(cors(corsOptions))
 
-// TODO: add cors whitelist with prod domain
-app.use(corsOptions ? cors(corsOptions) : cors())
 if (isProd) app.use(express.static('dist'))
 
 // app.use(session({
