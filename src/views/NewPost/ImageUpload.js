@@ -46,7 +46,7 @@ class ImageUpload extends React.PureComponent {
             <h1 className='mb-2 font-semibold text-gray-600'>Upload a picture of you wearing something.</h1>
             <label
               htmlFor='image-upload'
-              className='inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded cursor-pointer'>
+              className='inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer'>
               <svg className='inline fill-current h-4 w-4 mr-2' xmlns='http://www.w3.org/2000/svg' viewBox='0 2 24 24'>
                 <path d='M19.5 20.5h-15A2.47 2.47 0 0 1 2 18.07V5.93A2.47 2.47 0 0 1 4.5 3.5h4.6a1 1 0 0 1 .77.37l2.6 3.18h7A2.47 2.47 0 0 1 22 9.48v8.59a2.47 2.47 0 0 1-2.5 2.43z'></path>
               </svg>

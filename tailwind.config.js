@@ -4,10 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // blue: {
-        //   ...colors.blue,
-        //   '800': '#2659ff'
-        // }
+        blue: {
+          ...colors.blue,
+          '500': '#2564fb',
+          '600': '#1455f0'
+        }
       },
       maxHeight: {
         '100': '100px',

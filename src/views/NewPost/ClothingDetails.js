@@ -5,6 +5,8 @@ import { CLOTHING_TYPES, CLOTHING_GENDERS, CLOTHING_SIZES } from '../../../commo
 import validate from '../../../common/validators/clothing'
 import { handleNumberChange } from '../../util'
 
+// TODO: we should modify the forms to use FastField, so we don't re-render all the time
+// i tried but it didn't really work out... so this is fine for now
 const ClothingDetailsContainer = ({ formValues, onNextClick }) => {
   return (
     <Formik

@@ -36,12 +36,12 @@ const Navbar: React.SFC<NavbarProps> = ({ onUnitsChange }) => {
           </li>
           <li>
             <Link
-              className='inline-block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded sm:hidden'
+              className='inline-block bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded sm:hidden'
               to='/post'>
               <svg className='inline fill-current h-4 w-4' xmlns='http://www.w3.org/2000/svg' viewBox='2 4 20 20'><path d='M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z'/></svg>
             </Link>
             <Link
-              className='inline-block bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded hidden sm:block'
+              className='inline-block bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded hidden sm:block'
               to='/post'>
               <svg className='inline fill-current h-4 w-4 mr-1' xmlns='http://www.w3.org/2000/svg' viewBox='2 4 20 20'><path d='M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z'/></svg>
               Create Post
