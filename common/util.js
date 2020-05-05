@@ -23,8 +23,7 @@ exports.kgsToLbsString = (kgs) => {
 }
 
 exports.kgsToKgsString = (kgs) => {
-  const roundedKgs = Math.round(kgs)
-  return roundedKgs.toString() + ' kgs'
+  return parseFloat(kgs).toFixed(1).toString() + ' kgs'
 }
 
 // create limiter middleware for 15 minute window
