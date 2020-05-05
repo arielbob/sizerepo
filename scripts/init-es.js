@@ -32,9 +32,19 @@ const init = async () => {
         "analyzer": {
           "default": {
             "tokenizer": "standard",
+            "char_filter": [
+              "replace_dashes_with_dots"
+            ],
             "filter": [
               "lowercase", "acronym_multiplexer"
             ]
+          }
+        },
+        "char_filter": {
+          "replace_dashes_with_dots": {
+            "type": "pattern_replace",
+            "pattern": "\\-",
+            "replacement": "."
           }
         },
         "filter": {
