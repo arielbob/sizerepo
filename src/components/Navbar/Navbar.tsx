@@ -4,10 +4,11 @@ import { BasicSelect } from '../Form'
 import { UNITS } from '../../../common/constants'
 
 interface NavbarProps {
+  units: UNITS,
   onUnitsChange: any
 }
 
-const Navbar: React.SFC<NavbarProps> = ({ onUnitsChange }) => {
+const Navbar: React.SFC<NavbarProps> = ({ units, onUnitsChange }) => {
   return (
     <nav className='bg-white text-lg font-semibold p-3'>
       <ul className='container mx-auto flex justify-between items-center'>
@@ -19,10 +20,11 @@ const Navbar: React.SFC<NavbarProps> = ({ onUnitsChange }) => {
           </li>
         </div>
         <div className='flex items-center'>
-          <li className='mr-8'>
+          <li className='mr-3'>
             <div className='relative'>
               <select
                 className={'block appearance-none border px-3 py-1 pr-8 rounded leading-tight w-full'}
+                value={units}
                 onChange={(e) => {onUnitsChange(e.target.value)}}
               >
                 {

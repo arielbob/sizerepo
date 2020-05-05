@@ -18,21 +18,23 @@ interface RootState {
 class Root extends React.Component<{}, RootState> {
   constructor(props) {
     super(props)
+    const storedUnits = localStorage.getItem('units')
     this.state = {
-      units: UNITS.METRIC
+      units: (storedUnits in UNITS) ? UNITS[storedUnits] : UNITS.METRIC
     }
   }
 
   handleUnitsChange(units: UNITS) {
     this.setState({ units })
-    console.log('units changed to', units)
+    localStorage.setItem('units', units.toUpperCase())
+    // console.log('units changed to', units)
   }
 
   render () {
     return (
       <Router>
         <div className='text-gray-900'>
-          <Navbar onUnitsChange={(units: UNITS) => this.handleUnitsChange(units)}/>
+          <Navbar units={this.state.units} onUnitsChange={(units: UNITS) => this.handleUnitsChange(units)}/>
           <Switch>
               <Route exact path='/' render={
                 (props) => <Browse {...props} units={this.state.units} />
