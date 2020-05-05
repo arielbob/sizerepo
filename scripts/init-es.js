@@ -33,29 +33,38 @@ const init = async () => {
           "default": {
             "tokenizer": "standard",
             "char_filter": [
-              "replace_dashes_with_dots"
+              "replace_extras_with_dots"
             ],
             "filter": [
-              "lowercase", "acronym_multiplexer"
+              "lowercase", "synonyms", "acronym_multiplexer"
             ]
           }
         },
         "char_filter": {
-          "replace_dashes_with_dots": {
+          // turns h&m and t-shirt to h.m and t.shirt, respectively, so that they don't get deleted by the standard tokenizer
+          // so that later we can create the tokens 'hm' and 'tshirt' (remove_inner_extras) and ['h', 'm'] and ['t', 'shirt'] (word_delimiter_graph)
+          "replace_extras_with_dots": {
             "type": "pattern_replace",
-            "pattern": "\\-",
+            "pattern": "\\-|\\&",
             "replacement": "."
           }
         },
         "filter": {
           "acronym_multiplexer": {
             "type": "multiplexer",
-            "filters": ["remove_dots", "word_delimiter_graph"]
+            "filters": ["remove_inner_extras", "word_delimiter_graph"],
+            // we don't need the original since searches using match will also go through this analyzer, thus the original will never be matched
+            "preserve_original": false
           },
-          "remove_dots": {
+          "remove_inner_extras": {
             "type": "pattern_replace",
             "pattern": "\\.",
             "replacement": ""
+          },
+          "synonyms": {
+            "type": "synonym",
+            // TODO: replace with file with synonyms
+            "synonyms": ["jcrew => j.crew"]
           }
         }
       }
