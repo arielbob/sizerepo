@@ -56,7 +56,6 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
       weightKgs: '',
       gender: ''
     }
-    console.log('initial values in search form:', initialValues)
 
     return (
       <Formik

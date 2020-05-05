@@ -85,17 +85,11 @@ router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, re
     const bodyErrors = bodyValidator(body)
     const hasErrors = isNaN(imageRotation) || !hasImage || Object.keys(clothingErrors).length || Object.keys(bodyErrors).length
 
-    console.log(clothingErrors)
-    console.log(bodyErrors)
-    console.log('file data: ', file)
-
     if (hasErrors) {
       const err = new Error('Invalid input')
       err.status = 400
       return next(err)
     }
-
-    console.log('clothing before', clothing)
 
     for (let [k, v] of Object.entries(clothing)) {
       clothing[k] = condenseWhitespace(v)
@@ -112,9 +106,6 @@ router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, re
     convertArticleType(clothing)
     convertArticleSize(clothing)
 
-    console.log('clothing', clothing)
-    console.log('body', body)
-
     // detect and verify types
     const magic = new Magic(mmm.MAGIC_MIME_TYPE)
     let mimeType
@@ -124,7 +115,6 @@ router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, re
       return next(err)
     }
 
-    console.log(mimeType)
     const mimeData = mimeType.split('/')
     const filetype = mimeData[1]
     if (!ALL_ACCEPTED_FILETYPES.has(filetype)) {
@@ -159,7 +149,6 @@ router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, re
 
     // generate the hash of the final image buffer
     const hash = crypto.createHash('md5').update(finalImageBuffer).digest('hex')
-    console.log(hash)
 
     // upload to s3
     const s3Params = {
@@ -171,7 +160,6 @@ router.post('/submit', limiter15Mins(50), upload.single('image'), async (req, re
     let s3Object
     try {
       s3Object = await s3.upload(s3Params).promise()
-      console.log('uploaded at', s3Object.Location)
     } catch (err) {
       return next(err)
     }
@@ -229,7 +217,6 @@ router.get('/:id', (req, res, next) => {
         return next(err)
       }
 
-      console.log(post)
       res.status(200).json({
         data: post
       })

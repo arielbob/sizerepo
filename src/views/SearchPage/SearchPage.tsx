@@ -42,7 +42,6 @@ class SearchPage extends React.Component<any, SearchPageState> {
 
     // convert query params to initial form values
     const initialFormValues: SearchFormInput = convertQueryParamsToFormValues(query)
-    console.log('initial form values:', initialFormValues)
 
     this.setState({
       searchValues: initialFormValues
@@ -81,7 +80,6 @@ class SearchPage extends React.Component<any, SearchPageState> {
           hasNext,
           error: ''
         })
-        console.log(res.data.data)
       }).catch(err => {
         this.setState({
           error: err.response ? err.response.data.message : 'Could not fetch results'
@@ -111,7 +109,6 @@ class SearchPage extends React.Component<any, SearchPageState> {
   }
 
   render() {
-    console.log(this.props.match.params)
     return (
       <div className='container px-2 break-all overflow-hidden mx-auto my-8'>
         <h2 className='text-2xl font-bold mb-1'>Results</h2>

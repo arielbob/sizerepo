@@ -107,7 +107,6 @@ export const generateQueryWeight = (weightUnits, weightLbs, weightKgs): string =
 }
 
 export const convertQueryParamsToFormValues = (query: SearchQueryParams): SearchFormInput => {
-  console.log('query before converting to form values:', query)
   if (querySchema.isValidSync(query)) {
     const heightUnits = QUERY_PARAM_TO_HEIGHT_UNITS[query.height_units] || HEIGHT_UNITS.FT_IN
     let heightFeet = ''

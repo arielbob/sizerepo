@@ -104,7 +104,6 @@ class PostPage extends React.Component<any, PostPageState> {
           postData: res.data.data,
           error: ''
         })
-        console.log(res.data.data)
       }).catch(err => {
         this.setState({
           error: err.response ? err.response.data.message : 'Could not fetch post'

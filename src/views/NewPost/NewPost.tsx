@@ -123,8 +123,6 @@ class NewPost extends React.Component<NewPostProps, any> {
   }
 
   handlePost() {
-    console.log('posting...')
-
     if (!this.state.image.file) {
       return this.setState({
         image: {

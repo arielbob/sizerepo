@@ -46,11 +46,6 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
     for (let [k, v] of Object.entries(body)) {
       if (body[k]) body[k] = condenseWhitespace(v)
     }
-    console.log(req.query)
-    console.log(query)
-
-    console.log('clothing filter:', clothing)
-    console.log('body filter:', body)
 
     const must = [
       { multi_match: { query: query || '', fields: ['brand', 'article_name'] } }

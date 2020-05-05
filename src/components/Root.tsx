@@ -27,7 +27,6 @@ class Root extends React.Component<{}, RootState> {
   handleUnitsChange(units: UNITS) {
     this.setState({ units })
     localStorage.setItem('units', units.toUpperCase())
-    // console.log('units changed to', units)
   }
 
   render () {
