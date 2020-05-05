@@ -10,7 +10,10 @@
     "api": "cross-env NODE_ENV=development ts-node server.js",
     "profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "migrate": "node-pg-migrate",
-    "test": "jest"
+    "test": "jest",
+    "search:bulkindex": "node scripts/bulk-index-posts",
+    "search:deleteindex": "node scripts/delete-index",
+    "search:init": "node scripts/init-es"
   },
   "author": "Ariel Bobadilla",
   "license": "ISC",
