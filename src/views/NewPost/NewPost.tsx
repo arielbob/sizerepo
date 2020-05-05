@@ -14,6 +14,7 @@ import {
   WEIGHT_UNITS,
   API_URL
 } from '../../../common/constants'
+import { removeOrientationFromJPEG } from '../../util'
 
 const PAGES = {
   CLOTHING: 'clothing',
@@ -86,19 +87,29 @@ class NewPost extends React.Component<NewPostProps, any> {
     })
   }
 
-  // FIXME: visual rotation and actual rotation differ when no rotation is performed on an image
   handleFileChange(file) {
     URL.revokeObjectURL(this.state.image.url)
     if (file) {
-      this.setState({
-        image: {
-          ...this.state.image,
-          file,
-          rotation: 0,
-          url: URL.createObjectURL(file),
-          error: null
-        }
-      })
+      const fr = new FileReader()
+      const that = this
+
+      fr.onload = function() {
+        // we accept PNG and JPEG, but this function will just return null
+        // if it doesn't find the JPEG magic bytes, so we just check for null
+        // to handle non-jpeg uploads
+        const url = removeOrientationFromJPEG(this.result)
+        
+        that.setState({
+          image: {
+            ...that.state.image,
+            file,
+            rotation: 0,
+            url: url || URL.createObjectURL(file),
+            error: null
+          }
+        })
+      }
+      fr.readAsArrayBuffer(file)
     }
   }
 

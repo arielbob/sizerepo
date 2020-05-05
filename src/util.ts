@@ -183,3 +183,50 @@ export const convertQueryParamsToSearchData = (params: SearchQueryParams): Searc
 
   return searchData
 }
+
+// https://stackoverflow.com/questions/27638402/strip-exif-data-from-image
+// strip EXIF orientation data from JPEG image
+export const removeOrientationFromJPEG = (data) => {
+  const dv = new DataView(data)
+  const pieces = []
+  let offset = 0
+  let recess = 0
+  let i = 0
+
+  // check for jpeg magic bytes
+  if (dv.getUint16(offset) == 0xffd8) {
+      offset += 2
+      var app1 = dv.getUint16(offset)
+      offset += 2
+      while (offset < dv.byteLength) {
+          if (app1 == 0xffe1){
+            pieces[i] = {
+              recess: recess,
+              offset: offset - 2
+            }
+            recess = offset + dv.getUint16(offset)
+            i++
+          } else if (app1 == 0xffda) {
+              break
+          }
+
+          offset += dv.getUint16(offset)
+          var app1 = dv.getUint16(offset)
+          offset += 2
+      }
+
+      if (pieces.length > 0){
+          const newPieces = pieces.map(p => {
+            return data.slice(p.recess, p.offset)
+          })
+          newPieces.push(data.slice(recess))
+
+          const br = new Blob(newPieces, { type: 'image/jpeg' })
+          const url = URL.createObjectURL(br)
+
+          return url
+      }
+  }
+
+  return null
+}
