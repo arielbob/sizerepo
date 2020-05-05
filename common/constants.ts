@@ -11,6 +11,7 @@ export const CLOTHING_TYPES = {
   SHIRT: 'Shirt',
   PANTS: 'Pants',
   SHORTS: 'Shorts',
+  JACKET: 'Jacket',
   OUTERWEAR: 'Outerwear',
   KNITWEAR: 'Knitwear',
   SWEATSHIRT: 'Sweatshirt',
