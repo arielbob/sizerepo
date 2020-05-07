@@ -6,12 +6,15 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history'
 import ReactGA from 'react-ga'
+import { GA_TRACKING_ID } from '../env'
 import Navbar from './Navbar/Navbar'
 import Browse from '../views/Browse/Browse'
 import SearchPage from '../views/SearchPage/SearchPage'
 import NewPost from '../views/NewPost/NewPost'
 import PostPage from '../views/PostPage/PostPage'
 import { UNITS } from '../../common/constants'
+
+ReactGA.initialize(GA_TRACKING_ID)
 
 const history = createBrowserHistory()
 let prevLocationStr = history.location.pathname + history.location.search
