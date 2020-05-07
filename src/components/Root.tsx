@@ -1,21 +1,38 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
 } from 'react-router-dom';
+import { createBrowserHistory } from 'history'
+import ReactGA from 'react-ga'
 import Navbar from './Navbar/Navbar'
 import Browse from '../views/Browse/Browse'
 import SearchPage from '../views/SearchPage/SearchPage'
 import NewPost from '../views/NewPost/NewPost'
 import PostPage from '../views/PostPage/PostPage'
-import { UNITS } from '../../common/constants';
+import { UNITS } from '../../common/constants'
+
+const history = createBrowserHistory()
+let prevLocationStr = history.location.pathname + history.location.search
+ReactGA.set({ page: prevLocationStr }) // Update the user's current page
+ReactGA.pageview(prevLocationStr) // Record a pageview for the given page
+
+history.listen(location => {
+  const locationStr = location.pathname + location.search
+  // don't log navigation to same route
+  if (locationStr == prevLocationStr) return 
+  
+  prevLocationStr = locationStr
+  ReactGA.set({ page: locationStr })
+  ReactGA.pageview(locationStr)
+})
 
 interface RootState {
   units: UNITS
 }
 
-class Root extends React.Component<{}, RootState> {
+class Root extends React.Component<any, RootState> {
   constructor(props) {
     super(props)
     const storedUnits = localStorage.getItem('units')
@@ -31,7 +48,7 @@ class Root extends React.Component<{}, RootState> {
 
   render () {
     return (
-      <Router>
+      <Router history={history}>
         <div className='text-gray-900'>
           <Navbar units={this.state.units} onUnitsChange={(units: UNITS) => this.handleUnitsChange(units)}/>
           <Switch>
