@@ -42,7 +42,7 @@ app.use(cors(corsOptions))
 
 if (isProd) app.use(express.static('dist'))
 
-app.use('/api', limiter15Mins(750), apiRoutes)
+app.use('/api', limiter15Mins(500), apiRoutes)
 
 app.use((req, res, next) => {
   res.format({

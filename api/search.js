@@ -47,11 +47,14 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
       if (body[k]) body[k] = condenseWhitespace(v)
     }
 
-    const must = [
-      { multi_match: { query: query || '', fields: ['brand', 'article_name'] } }
+    // const must = [
+    //  { multi_match: { query: query || '', fields: ['brand', 'article_name'] } }
+    //]
+
+    const should = [
+      { multi_match: { query: query || '', fields: ['brand', 'article_name', 'article_type'] } }
     ]
 
-    const should = []
     // it's fine if we don't validate these since they're just strings
     if (clothing.gender) should.push({
       match: { article_gender: { query: clothing.gender } }
@@ -127,7 +130,7 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
           size: MAX_RESULTS_SIZE + 1,
           query: {
             bool: {
-              must,
+              // must,
               should
             }
           }
