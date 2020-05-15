@@ -14,8 +14,8 @@ const init = async () => {
     mappings: {
       properties: {
         id: { type: 'keyword' },
-        brand: { type: 'text' },
-        article_name: { type: 'text' },
+        brand: { type: 'text', norms: false },
+        article_name: { type: 'text', norms: false },
         article_gender: { type: 'keyword' },
         article_type: { type: 'keyword' },
         article_size: { type: 'keyword' },

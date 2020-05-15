@@ -172,7 +172,7 @@ export const convertQueryParamsToSearchData = (params: SearchQueryParams): Searc
     page: params.page,
     article_gender: params.article_gender,
     type: params.type,
-    size: params.type,
+    size: params.size,
     waist: params.waist,
     inseam: params.inseam,
     height: generateQueryHeight(params.height_units, params.height_ft, params.height_in, params.height_cm),

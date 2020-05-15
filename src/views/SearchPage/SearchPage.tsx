@@ -104,6 +104,7 @@ class SearchPage extends React.Component<any, SearchPageState> {
     return queryString.stringify(query)
   }
 
+  // search is executed by updating the search url and calling handleSearch in componentDidUpdate()
   onSearch(values) {
     this.updateSearchURL(values, true)
   }

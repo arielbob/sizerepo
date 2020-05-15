@@ -47,12 +47,18 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
       if (body[k]) body[k] = condenseWhitespace(v)
     }
 
-    // const must = [
-    //  { multi_match: { query: query || '', fields: ['brand', 'article_name'] } }
-    //]
+    const must = [
+      {
+        multi_match: {
+          query: query || '',
+          fields: ['brand', 'article_name', 'article_type'],
+          type: 'most_fields'
+        }
+      }
+    ]
 
     const should = [
-      { multi_match: { query: query || '', fields: ['brand', 'article_name', 'article_type'] } }
+    //   { multi_match: { query: query || '', fields: ['brand', 'article_name', 'article_type'] } }
     ]
 
     // it's fine if we don't validate these since they're just strings
@@ -61,9 +67,6 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
     })
     if (clothing.type) should.push({
       match: { article_type: { query: clothing.type } }
-    })
-    if (clothing.articleSize) should.push({
-      match: { article_size: { query: clothing.size } }
     })
     if (clothing.type === CLOTHING_TYPES.PANTS || clothing.type === CLOTHING_TYPES.SHORTS) {
       if (clothing.waist && !isNaN(parseInt(clothing.waist))) should.push({
@@ -93,26 +96,29 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
         match: { article_size: { query: clothing.size } }
       })
     }
-    if (clothing.height && !isNaN(parseFloat(clothing.height))) should.push({
+
+    if (body.height && !isNaN(parseFloat(body.height))) should.push({
       function_score: {
         gauss: {
           height_m: {
-            origin: parseFloat(clothing.height),
+            origin: parseFloat(body.height),
             scale: 0.5,
             decay: 0.3
           }
-        }
+        },
+        boost: 2
       }
     })
     if (body.weight && !isNaN(parseInt(body.weight))) should.push({
       function_score: {
         gauss: {
-          height_m: {
+          weight_kg: {
             origin: parseFloat(body.weight),
             scale: 5,
             decay: 0.3
           }
-        }
+        },
+        boost: 2
       }
     })
     if (body.gender) should.push({
@@ -130,7 +136,7 @@ router.get('/', limiter15Mins(300), async (req, res, next) => {
           size: MAX_RESULTS_SIZE + 1,
           query: {
             bool: {
-              // must,
+              must,
               should
             }
           }

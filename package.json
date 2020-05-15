@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "start": "cross-env NODE_ENV=production ts-node server.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
-    "api": "cross-env NODE_ENV=development ts-node server.js",
+    "api": "cross-env NODE_ENV=development nodemon --watch 'api/**/*' --watch 'common/**/*' --exec 'ts-node' server.js",
     "profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "migrate": "node-pg-migrate",
     "test": "jest",
